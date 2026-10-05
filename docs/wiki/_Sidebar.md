@@ -13,4 +13,4 @@
 - [Architecture and storage](Architecture-and-storage)
 - [Troubleshooting](Troubleshooting)
 
-[Website](https://agencyenterprise.github.io/fractal_swarm_lens/) · [Code](https://github.com/agencyenterprise/fractal_swarm_lens)
+[Website](https://agencyenterprise.github.io/swarm_lens/) · [Code](https://github.com/agencyenterprise/swarm_lens)

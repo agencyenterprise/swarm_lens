@@ -62,6 +62,6 @@ Your factory gets a `PluginServices(framework, artifacts, data)`. A few constrai
 
 The server tells the browser where your module is, and the browser loads all plugins before it restores the saved route. If a plugin fails to install, any UI it had already registered is removed and the failure is reported.
 
-From `host`, you can register views and visualizations, add actions, read the current context, load timeline and detail data, and jump to a branch and cursor. The bundled MAST plugin is a full working example. The complete API is in the [integration guide](https://github.com/agencyenterprise/fractal_swarm_lens/blob/main/docs/integration.md#write-a-web-plugin).
+From `host`, you can register views and visualizations, add actions, read the current context, load timeline and detail data, and jump to a branch and cursor. The bundled MAST plugin is a full working example. The complete API is in the [integration guide](https://github.com/agencyenterprise/swarm_lens/blob/main/docs/integration.md#write-a-web-plugin).
 
 One distinction that trips people up: an analysis `Plugin` and a `WebExtension` are separate interfaces. `--plugin` registers the web extension, and it's up to your factory to set up any analysis service behind it. When you package a plugin, ship the browser assets with it, and keep credentials and Python source out of the public assets directory.

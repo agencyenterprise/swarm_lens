@@ -590,7 +590,7 @@ async function apiTranscript() {
 
 // Code excerpts are read verbatim at record time: the local checkout, or the merged plugin PR on GitHub.
 const REPO = process.env.SWARM_LENS_REPO ?? path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const GITHUB_REPO = "agencyenterprise/fractal_swarm_lens";
+const GITHUB_REPO = "agencyenterprise/swarm_lens";
 const PLUGIN_COMMIT = "45ec084997455628baa363f3bb1b485fe859cb13"; // merge of PR #7 (web plugins ship their own frontend)
 
 function excerpt(text, ranges) {

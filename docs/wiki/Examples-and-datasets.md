@@ -13,7 +13,7 @@ python -m examples.aciarena.samples import \
 swarm-lens --data data --port 8765
 ```
 
-The `aciarena` extra pulls in some heavy ML dependencies; if you'd rather keep them out of your main environment, the [ACIArena guide](https://github.com/agencyenterprise/fractal_swarm_lens/blob/main/examples/aciarena/README.md) uses a separate `.venv-aciarena`.
+The `aciarena` extra pulls in some heavy ML dependencies; if you'd rather keep them out of your main environment, the [ACIArena guide](https://github.com/agencyenterprise/swarm_lens/blob/main/examples/aciarena/README.md) uses a separate `.venv-aciarena`.
 
 This imports files that are already in the repo. It doesn't regenerate them and doesn't call a model.
 
@@ -35,7 +35,7 @@ Import any of them with the same command, swapping in the folder name. For MAD, 
 
 ## Generating your own data
 
-The generator covers math, medicine, and code scenarios, runs control and attack conditions in pairs, and can run them concurrently. It needs API credentials and makes paid model calls. The [ACIArena guide](https://github.com/agencyenterprise/fractal_swarm_lens/blob/main/examples/aciarena/README.md) has the commands, budgets, and manifest format, and explains how upstream attacks differ from our local `medicine-wrong-option` extension.
+The generator covers math, medicine, and code scenarios, runs control and attack conditions in pairs, and can run them concurrently. It needs API credentials and makes paid model calls. The [ACIArena guide](https://github.com/agencyenterprise/swarm_lens/blob/main/examples/aciarena/README.md) has the commands, budgets, and manifest format, and explains how upstream attacks differ from our local `medicine-wrong-option` extension.
 
 A few datasets aren't in the repo: the 30-task wrong-option batch, the message-board dataset, and AI Village (which needs dataset access to import). They won't appear after a fresh clone.
 

@@ -26,4 +26,4 @@ Look at the aggregator's actual answer next to the native grader's result. Upstr
 
 ## Filing an issue
 
-It helps a lot if you include your Git commit, Python version, runtime version, the command you started the server with (minus any secrets), which data directory you used, steps to reproduce, and any error text with sensitive bits removed. Please never attach `.env` files or credentials. [Open an issue](https://github.com/agencyenterprise/fractal_swarm_lens/issues).
+It helps a lot if you include your Git commit, Python version, runtime version, the command you started the server with (minus any secrets), which data directory you used, steps to reproduce, and any error text with sensitive bits removed. Please never attach `.env` files or credentials. [Open an issue](https://github.com/agencyenterprise/swarm_lens/issues).

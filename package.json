@@ -10,7 +10,8 @@
     "build:message-format": "esbuild frontend/message-format.js --bundle --format=esm --target=es2022 --minify --outfile=src/swarm_lens/web/message-format.js",
     "build:components": "esbuild frontend/components.js --bundle --format=esm --target=es2022 --minify --outfile=src/swarm_lens/web/components.js",
     "build:styles": "tailwindcss -i frontend/styles.css -o src/swarm_lens/web/tailwind.css --minify",
-    "test": "node --test tests/web/*.test.mjs"
+    "test": "node --test tests/web/*.test.mjs",
+    "build:site": "node tools/build-site-wiki.mjs"
   },
   "dependencies": {
     "@zag-js/combobox": "1.44.0",

@@ -14,7 +14,7 @@ What Swarm Lens itself adds is the infrastructure around these: an ordered event
 
 ## About CASPIAN
 
-CASPIAN is included as an experimental feature. As far as we know, this is the first public implementation of the method in [Venkatesh et al. (2026)](https://arxiv.org/abs/2605.19240). Expect rough edges, and please [tell us](https://github.com/agencyenterprise/fractal_swarm_lens/issues) when you find them.
+CASPIAN is included as an experimental feature. As far as we know, this is the first public implementation of the method in [Venkatesh et al. (2026)](https://arxiv.org/abs/2605.19240). Expect rough edges, and please [tell us](https://github.com/agencyenterprise/swarm_lens/issues) when you find them.
 
 ## Cascades vs. failures
 

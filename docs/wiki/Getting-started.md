@@ -5,8 +5,8 @@
 You need Python 3.11 or newer and Git. (If you plan to use the CrewAI integration, use Python 3.12; that's the version we test it on.)
 
 ```sh
-git clone https://github.com/agencyenterprise/fractal_swarm_lens.git
-cd fractal_swarm_lens
+git clone https://github.com/agencyenterprise/swarm_lens.git
+cd swarm_lens
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[web]'
