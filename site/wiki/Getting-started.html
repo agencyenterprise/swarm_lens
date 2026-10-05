@@ -11,7 +11,13 @@ swarm-lens --data data --port 8765
 <p>On Windows, activate the environment with <code>.venv\Scripts\Activate.ps1</code> in PowerShell instead.</p>
 <p>Then open <a href="http://127.0.0.1:8765">http://127.0.0.1:8765</a>. Press Ctrl+C in the terminal to stop the server. The browser assets come prebuilt, so you only need Node.js if you're changing the frontend.</p>
 <h2>Load a trace</h2>
-<p>Choose <strong>⋯ → Import trace</strong>, paste a transcript, and it opens in the Timeline. If you'd rather start with something richer, with recorded interactions and memories, follow the <a href="Examples-and-datasets.html">medical debate recipe</a>.</p>
+<p>Choose your starting point:</p>
+<ul>
+<li><strong>Use a public recording:</strong> import the bundled AI Village replay or ACIArena pairs from <a href="Examples-and-datasets.html">Examples and datasets</a>. The catalog also links the German wiki export and AI Village's Hugging Face dataset, with access and adapter requirements.</li>
+<li><strong>Bring your own conversation:</strong> choose <strong>⋯ → Import trace</strong> and paste a transcript. Structured source files need a matching adapter; see the <a href="https://github.com/agencyenterprise/swarm_lens/blob/main/docs/integration.md">integration guide</a>.</li>
+<li><strong>Run your own agents:</strong> follow <a href="Live-collection-and-branching.html">Live collection and branching</a> to collect a custom CrewAI run and inspect its saved trace.</li>
+</ul>
+<p>Published a useful dataset? We welcome PRs adding its public link and import instructions to the <a href="Examples-and-datasets.html">dataset catalog</a>.</p>
 <p>If the run picker is empty, the workspace just doesn't have any runs yet. The <code>--data</code> flag points at the directory holding your SQLite history, artifacts, and other stores, so use the same path every time you restart or your runs will seem to vanish.</p>
 <h2>Add MAST analysis (optional)</h2>
 <pre><code class="language-sh">python -m pip install -e '.[mast]'

@@ -19,7 +19,13 @@ Then open <http://127.0.0.1:8765>. Press Ctrl+C in the terminal to stop the serv
 
 ## Load a trace
 
-Choose **⋯ → Import trace**, paste a transcript, and it opens in the Timeline. If you'd rather start with something richer, with recorded interactions and memories, follow the [medical debate recipe](Examples-and-datasets).
+Choose your starting point:
+
+- **Use a public recording:** import the bundled AI Village replay or ACIArena pairs from [Examples and datasets](Examples-and-datasets). The catalog also links the German wiki export and AI Village's Hugging Face dataset, with access and adapter requirements.
+- **Bring your own conversation:** choose **⋯ → Import trace** and paste a transcript. Structured source files need a matching adapter; see the [integration guide](https://github.com/agencyenterprise/swarm_lens/blob/main/docs/integration.md).
+- **Run your own agents:** follow [Live collection and branching](Live-collection-and-branching) to collect a custom CrewAI run and inspect its saved trace.
+
+Published a useful dataset? We welcome PRs adding its public link and import instructions to the [dataset catalog](Examples-and-datasets).
 
 If the run picker is empty, the workspace just doesn't have any runs yet. The `--data` flag points at the directory holding your SQLite history, artifacts, and other stores, so use the same path every time you restart or your runs will seem to vanish.
 

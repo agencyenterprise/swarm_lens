@@ -1,4 +1,49 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Examples and datasets · Swarm Lens docs</title><link rel="icon" href="../favicon.ico"><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="../wiki.css"></head><body><a class="skip" href="#article">Skip to content</a><header class="nav wrap"><a class="brand" href="../"><img src="../assets/logo.gif" width="38" height="38" alt="">swarm<span class="light">lens</span></a><nav aria-label="Main navigation"><a href="../#demo">Demo</a><a href="Home.html">Docs</a><a class="nav-code" href="https://github.com/agencyenterprise/swarm_lens">GitHub ↗</a></nav></header><div class="wiki-layout wrap"><aside><div class="eyebrow">DOCS</div><nav aria-label="Wiki pages"><a  href="Home.html">Home</a><a  href="Getting-started.html">Getting started</a><a  href="Explore-traces.html">Explore traces</a><a aria-current="page" href="Examples-and-datasets.html">Examples and datasets</a><a  href="Live-collection-and-branching.html">Live collection and branching</a><a  href="Build-a-plugin.html">Build a plugin</a><a  href="Research-and-methods.html">Research and methods</a><a  href="Architecture-and-storage.html">Architecture and storage</a><a  href="Troubleshooting.html">Troubleshooting</a></nav></aside><main id="article"><h1>Examples and datasets</h1>
+<p>Start with a public recording, import your own trace, or run your own agents and collect a new dataset. Saved replay does not call a model. Live execution and optional LLM analysis do.</p>
+<h2>Choose a dataset</h2>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Useful for</th>
+<th>How to start in SwarmLens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://theaidigest.org/village/goal/perform-novel-research">AI Village public research replay</a>, by AI Digest / AI Village</td>
+<td>Long conversations and collaboration across agents</td>
+<td><strong>Ready to import:</strong> the selected May 11–15, 2026 recording is bundled; use the command below.</td>
+</tr>
+<tr>
+<td>ACIArena control/attack recordings</td>
+<td>Comparing a shared task with and without an attack</td>
+<td><strong>Ready to import:</strong> bundled pairs; follow the medical debate recipe below.</td>
+</tr>
+<tr>
+<td><a href="https://collusion.wiki/explorer/download">German wiki agent message board</a></td>
+<td>Studying information sharing through public wiki edits</td>
+<td><strong>Public download; adapter needed:</strong> start with a small page history as described below.</td>
+</tr>
+<tr>
+<td><a href="https://huggingface.co/datasets/aidigestorg/ai-village">AI Village on Hugging Face</a></td>
+<td>Broader chat, activity, memory and computer-use research</td>
+<td><strong>Access approval and adapter needed:</strong> the dataset card is public; files are gated under research terms. This is distinct from the bundled public replay.</td>
+</tr>
+</tbody>
+</table>
+<h2>Quick start: AI Village public recording</h2>
+<p>After the <a href="Getting-started.html">quickstart installation</a>, run from the repository root with your virtual environment active:</p>
+<pre><code class="language-sh">python -m examples.crewai.ai_village_research import --data data
+swarm-lens --data data --port 8765
+</code></pre>
+<p>Open the explorer and select <strong>Perform novel research!</strong> in the run picker. This imports the bundled recording without a provider key or Hugging Face token. Use the same <code>--data</code> directory when restarting the server. The selected public sessions contain chat and activity notices, not the agents' private memories or full computer sessions. See the <a href="https://github.com/agencyenterprise/swarm_lens/blob/main/docs/ai-village.md">AI Village guide</a> for provenance and continuation instructions.</p>
+<h2>Explore the German wiki data</h2>
+<p>The <a href="https://collusion.wiki/explorer/download">download page</a> offers page metadata, full-text revisions, chronological events, agent labels and a provenance manifest. Begin with one page and its revision history rather than importing the entire archive.</p>
+<p>Download the export and retain its manifest and checksums. For a quick text inspection, prepare a readable transcript from a small selection and use <strong>⋯ → Import trace</strong>. To preserve native timestamps, page IDs and revision relationships, write a source adapter using the <a href="https://github.com/agencyenterprise/swarm_lens/blob/main/docs/integration.md">integration guide</a>. There is no dedicated German wiki importer yet; <code>examples/messageboard</code> imports a different simulator format.</p>
+<p>These records show observable wiki edits. They do not establish which agents read each edit, so an adapter should not invent delivery links or private state. Attribute the source to the investigators listed on <a href="https://collusion.wiki/">collusion.wiki</a>.</p>
+<h2>Explore the full AI Village dataset</h2>
+<p>Request access through the <a href="https://huggingface.co/datasets/aidigestorg/ai-village">Hugging Face dataset card</a> and follow its research terms and attribution requirements. Start with <code>village-transcript.json</code> for chat, then consult <code>SCHEMA.md</code> for richer tables. The bundled public-replay importer does not accept these full-dataset files; map a selected subset through a source adapter. For an immediate first run, use the bundled recording above.</p>
 <h2>The medical debate from the demo</h2>
 <p>From the repository root on <code>main</code>, with your virtual environment active:</p>
 <pre><code class="language-sh">python -m pip install -e '.[web,aciarena,mast]'
@@ -46,7 +91,20 @@ swarm-lens --data data --port 8765
 <p>Import any of them with the same command, swapping in the folder name. For MAD, &quot;20 rounds&quot; is the maximum, not a promise; the moderator can end the debate early, and in the bundled pair it ends before the first round.</p>
 <h2>Generating your own data</h2>
 <p>The generator covers math, medicine, and code scenarios, runs control and attack conditions in pairs, and can run them concurrently. It needs API credentials and makes paid model calls. The <a href="https://github.com/agencyenterprise/swarm_lens/blob/main/examples/aciarena/README.md">ACIArena guide</a> has the commands, budgets, and manifest format, and explains how upstream attacks differ from our local <code>medicine-wrong-option</code> extension.</p>
-<p>A few datasets aren't in the repo: the 30-task wrong-option batch, the message-board dataset, and AI Village (which needs dataset access to import). They won't appear after a fresh clone.</p>
+<p>The 30-task wrong-option batch and the medical message-board simulator dataset are not bundled. The selected AI Village public replay is bundled; its full Hugging Face dataset is not.</p>
 <h2>What to keep for each experiment</h2>
 <p>Hold on to the manifest, the source revision, trace hashes, model settings, the exact inputs and outputs, the delivery links between agents, and the native grader output. Upstream's option-letter extraction occasionally misreads an answer, so look at the raw response before trusting a grader label.</p>
+<h2>Bring your own data</h2>
+<p>For an existing conversation, choose <strong>⋯ → Import trace</strong> and paste a readable transcript. For structured data, implement a source adapter that maps your records to SwarmLens facts; the <a href="https://github.com/agencyenterprise/swarm_lens/blob/main/docs/integration.md">integration guide</a> describes that contract. Arbitrary JSON, CSV and benchmark archives are not automatically interchangeable.</p>
+<p>To generate a custom dataset, instrument your own CrewAI application using the <a href="Live-collection-and-branching.html">live collection guide</a>, or use the ACIArena generator above. Keep the saved recording so others can inspect it without rerunning the agents. A live continuation is a new execution, not a reproduction of missing original runtime state.</p>
+<h2>Contribute a public dataset</h2>
+<p><strong>Have you published a multi-agent dataset? We encourage you to open a PR linking to it.</strong> Small recordings, custom experiments and adapters are welcome alongside larger public datasets.</p>
+<p>Edit <a href="https://github.com/agencyenterprise/swarm_lens/blob/main/docs/wiki/Examples-and-datasets.md">this catalog's Markdown source</a> on a branch and <a href="https://github.com/agencyenterprise/swarm_lens/compare">open a pull request</a>. Include:</p>
+<ul>
+<li>A stable public dataset link, creator attribution, and license or access terms.</li>
+<li>What the records contain, their format, approximate size, and a useful small starting subset.</li>
+<li>Import instructions or an adapter link; explicitly state when an adapter is still needed.</li>
+<li>Available timestamps, agent identities and interaction links, plus known gaps or inferred fields.</li>
+</ul>
+<p>Link to publicly hosted files rather than adding large archives to this repository. Share only data you have permission to publish, with secrets and personal information removed. Run <code>npm run build:site</code> and include the generated wiki HTML in your PR. A catalog entry does not require a new importer; being clear about compatibility helps others contribute one.</p>
 <div class="wiki-bottom">These pages describe <code>main</code>. <a href="https://github.com/agencyenterprise/swarm_lens/blob/main/docs/wiki/Examples-and-datasets.md">View this page's source ↗</a></div></main></div></body></html>
