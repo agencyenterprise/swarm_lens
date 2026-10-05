@@ -376,3 +376,8 @@ The UI uses Tailwind CSS, accessible Zag.js controls, and locally bundled Markdo
 **Still limited:** single-process local deployment; no built-in authentication or Docker configuration; no guarantee of exact restoration for external tools, remote computers, or arbitrary agent frameworks. CASPIAN remains available as an experimental library module without a dedicated web API. Its cascade-detection accuracy has not been established, and cascade effects are not necessarily harmful behavior.
 
 AI Village material is attributed to AI Digest / AI Village; ACIArena and MAST retain their upstream provenance. Provider icons identify model families and do not imply endorsement. See [third-party notices](THIRD_PARTY.md) and [branding assets](assets/branding/swarm-lens-robot-factory-v1/README.md).
+## Public datasets and your own traces
+
+Start with a bundled AI Village recording or ACIArena control/attack pair, import your own conversation, or collect a custom CrewAI run. The [dataset catalog](https://agencyenterprise.github.io/swarm_lens/wiki/Examples-and-datasets.html) includes import recipes, the German wiki public export, and AI Village on Hugging Face, with compatibility and access requirements for each.
+
+We welcome pull requests linking datasets you have made public. Add a source link, attribution and terms, a small starting subset, and import instructions to [the catalog](docs/wiki/Examples-and-datasets.md).
