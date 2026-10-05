@@ -14,7 +14,7 @@ Source application → ordered events → framework → SQLite history
 
 The core models agents, channels, messages, memory, tools, and environment state. On top of that, the application layer handles replay, branches, interventions, and the extension interfaces. Adapters deal with SQLite, Git, and artifacts, and the web code only handles presentation. Anything specific to a dataset, like how to interpret its fields, stays in the source application.
 
-The [architecture reference](https://github.com/agencyenterprise/fractal_swarm_lens/blob/main/docs/architecture.md) has the details.
+The [architecture reference](https://github.com/agencyenterprise/swarm_lens/blob/main/docs/architecture.md) has the details.
 
 ## Workspaces
 

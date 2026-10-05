@@ -2,7 +2,7 @@
 
 Swarm Lens is a workspace for looking at what happens *between* agents. It records the messages, tool calls, and memories in a multi-agent system, lays them out on one timeline, and lets you fork the conversation at any point to try something different. Everything runs locally.
 
-[Watch the demo](https://agencyenterprise.github.io/fractal_swarm_lens/#demo) · [Source code](https://github.com/agencyenterprise/fractal_swarm_lens) · [Report an issue](https://github.com/agencyenterprise/fractal_swarm_lens/issues)
+[Watch the demo](https://agencyenterprise.github.io/swarm_lens/#demo) · [Source code](https://github.com/agencyenterprise/swarm_lens) · [Report an issue](https://github.com/agencyenterprise/swarm_lens/issues)
 
 ## Where to start
 

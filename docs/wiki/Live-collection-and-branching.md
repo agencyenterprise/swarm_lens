@@ -36,7 +36,7 @@ python -m examples.crewai.demo --offline --url http://127.0.0.1:8765
 
 ## Instrument your own crew
 
-Wrap your kickoff call with `swarm_lens.integrations.crewai.observe`, passing the crew, its inputs, and a registered runtime. Your application stays in charge of the crew factory, the tool implementations, and its own revision. The [integration example](https://github.com/agencyenterprise/fractal_swarm_lens/blob/main/examples/crewai/README.md) walks through the full setup, including observer configuration and which kinds of state aren't supported yet.
+Wrap your kickoff call with `swarm_lens.integrations.crewai.observe`, passing the crew, its inputs, and a registered runtime. Your application stays in charge of the crew factory, the tool implementations, and its own revision. The [integration example](https://github.com/agencyenterprise/swarm_lens/blob/main/examples/crewai/README.md) walks through the full setup, including observer configuration and which kinds of state aren't supported yet.
 
 ## Continue a saved conversation
 

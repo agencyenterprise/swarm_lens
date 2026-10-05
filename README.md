@@ -47,7 +47,7 @@ Swarm Lens gives messages, tools, memories, interventions, and connections one s
 Use Python 3.12 and Git. Run example commands from the repository root; `examples/` is source-checkout code rather than an installed Python package.
 
 ```sh
-git clone https://github.com/agencyenterprise/fractal_swarm_lens.git swarm-lens
+git clone https://github.com/agencyenterprise/swarm_lens.git swarm-lens
 cd swarm-lens
 
 python3.12 -m venv .venv-crewai
