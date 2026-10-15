@@ -81,6 +81,15 @@ class Framework:
             event = replace(event, data=asdict(state.environment))
         return event
 
+    @classmethod
+    def dry_run(cls, source: Source, branch_id: str = "dry-run") -> list[Event]:
+        """The events a source's facts would become on an empty branch, checked by the reducer; nothing is saved.
+
+        An importer can profile its records before importing them (see `application.profile`).
+        """
+        state = State(branch_id)
+        return [cls._event(state, fact) for fact in source.facts()]
+
     def ingest(self, branch_id: str, source: Source, *, batch_size: int = 100,
                expected_head: int | None = None) -> int:
         if batch_size < 1:
