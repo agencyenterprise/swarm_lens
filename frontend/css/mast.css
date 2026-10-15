@@ -89,6 +89,8 @@
 .mast-size { display: flex; align-items: flex-start; gap: 8px; color: var(--text-2); }
 .mast-size::before { content: ""; flex: none; width: 7px; height: 7px; margin-top: 6px; border-radius: 50%; background: var(--text-3); }
 .mast-size[data-state="ready"]::before { background: var(--accent); }
+.mast-data-warnings { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; font-size: 13px; }
+.mast-data-warnings:empty { display: none; }
 .mast-size[data-state="error"] { color: var(--danger); }
 .mast-size[data-state="error"]::before { background: var(--danger); }
 .mast-dialog input[type="file"] { padding: 5px; color: var(--text-2); }

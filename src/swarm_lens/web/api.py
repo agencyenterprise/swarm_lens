@@ -96,7 +96,8 @@ def event_summary(event):
             "entity_id": d.get("id"), "reply_to_id": d.get("reply_to_id"),
             "stage_label": d.get("metadata", {}).get("stage_label"),
             "delivered_sources": event.source.get("delivered_sources"),
-            "channel_name": d.get("name") if family == "channel" else None}
+            "channel_name": d.get("name") if family == "channel" else None,
+            "time_grade": event.source.get("time_grade", "exact")}
 
 
 def include_extensions(app: FastAPI, extensions: tuple[WebExtension, ...]) -> None:

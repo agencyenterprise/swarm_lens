@@ -32,6 +32,20 @@ Inputs use timezone-aware ISO timestamps. Emit creation facts before facts that 
 
 The maintained AI Village research example derives stable event IDs from native source identities and records a source checksum. Reimporting the same bundle reuses its matching recording. These are explicit application choices, not generic dataset interpretation.
 
+## Declare what your records lack
+
+Many datasets are missing actors, clock times or conversation. Do not invent them. State what is missing with the conventions in `swarm_lens.application.uncertainty`; they change nothing about how facts are applied.
+
+| Convention | Where | Values |
+| --- | --- | --- |
+| Time grade | `source["time_grade"]` on a fact (`provenance(grade, **source)`) | `exact` (the default), `approximate`, `ordinal` |
+| Attribution | `metadata["attribution"]` on an agent | `named` (the default), `pseudonymous`, `unattributed` |
+| Declared profile | `metadata["declared_profile"]` on `environment.updated` (`declared_profile(...)`) | The adapter's own statement of what is missing and why |
+
+For records that keep only their order, stamp facts with `OrdinalClock().tick()` and declare them `ordinal`; the explorer then shows "order only" instead of clock times. For tool calls with no known actor, add one agent with `unattributed_agent(at)`, since the reducer requires an agent for every tool call.
+
+`Framework.dry_run(source)` applies a source's facts to a private state and returns the events they would become, saving nothing. Pass them to `application.profile.profile(events)` to see what a slice can support before you import it. The bundled **Data profile** view shows the same profile for any branch, including runs imported before these conventions existed, and MAST's size check lists its warnings. The [SwarmTraces](../examples/swarmtraces/README.md) and [collusion.wiki](../examples/collusion_wiki/README.md) importers use all three conventions.
+
 ## Plugins
 
 Analyses and interventions are plugins. A plugin reads a branch through a read-only view and returns metrics, annotations, a report, or the facts for a new fork. The application validates and stores them, and the explorer shows them without plugin-specific frontend code. See [writing a plugin](plugins.md) for the contract, registration, the HTTP API and testing.

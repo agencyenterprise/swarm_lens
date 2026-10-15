@@ -1,4 +1,4 @@
-import { el, button, avatar, color, eventTone, speakerName, stageOf, time, formatNumber, failure, tip, recordedUsage } from "./ui.js";
+import { el, button, avatar, color, eventTone, speakerName, stageOf, eventTime, formatNumber, failure, tip, recordedUsage } from "./ui.js";
 import { forkTips } from "./branch.js";
 import { renderMarkdownInto } from "./markdown.js";
 import { findingsForEvent, eventSpan, pluginTitle } from "./findings.js";
@@ -133,7 +133,7 @@ function eventView(root, { event, detail }, { state, events, comments, findings,
   const head = el("header", "ins-head");
   const who = el("div", "ins-who");
   const speaker = agent?.name || data.sender_name || speakerName(event, state.agents);
-  const stamp = [event.stage_label, time(event.at), `#${event.position}`].filter(Boolean).join(" · ");
+  const stamp = [event.stage_label, eventTime(event), `#${event.position}`].filter(Boolean).join(" · ");
   who.append(el("span", "ins-name", speaker), el("span", "ins-stamp muted", stamp));
   head.append(avatar(agent || { name: speaker }), who, closeButton(actions));
   root.append(head);

@@ -158,3 +158,10 @@ export function mastTraitDetails(label, job, host, definition) {
   root.addEventListener("toggle", () => { if (root.open) load(); });
   return root;
 }
+
+// Warnings from the data profile: MAST still runs, but its failure modes assume agents messaging each other.
+export function dataWarningItems(preview) {
+  const items = preview.data_warnings || [];
+  if (!items.length) return [];
+  return [el("li", "mast-error", "This history may not suit MAST:"), ...items.map((text) => el("li", "muted", text))];
+}
