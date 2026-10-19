@@ -69,7 +69,7 @@ class OpenAIMastJudge:
                       "max_completion_tokens": self.max_completion_tokens, "store": False}
         if self.temperature is not None:
             parameters["temperature"] = self.temperature
-        with OpenAI(base_url="https://api.openai.com/v1", timeout=300.0, max_retries=0) as client:
+        with OpenAI(base_url=os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"), timeout=300.0, max_retries=0) as client:
             result = client.chat.completions.create(**parameters)
         if not result.choices or not result.choices[0].message.content:
             raise ValueError("The judge returned no textual assessment")
