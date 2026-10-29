@@ -1,6 +1,6 @@
 import { $, el, button, api, post, toast, failure, formatNumber, tip } from "swarm-lens/ui.js";
 import { field, openDialog } from "swarm-lens/dialog.js";
-import { mastTraitDetails, modeDefinitions } from "./details.js";
+import { dataWarningItems, mastTraitDetails, modeDefinitions } from "./details.js";
 import { workspaceURL } from "swarm-lens/workspace.js";
 
 const prefix = "/plugins/mast";
@@ -265,11 +265,12 @@ function analyzeDialog(manifest, selection, host) {
   caption.tabIndex = 0;
   const status = el("p", "mast-size");
   const requests = el("p", "muted");
+  const dataWarnings = el("ul", "mast-data-warnings");
   status.setAttribute("role", "status");
   root.append(caption, segmented("Trace completeness", completenessOptions, completeness, (value) => {
     completeness = value;
     checkInput();
-  }), status, requests);
+  }), status, dataWarnings, requests);
   if (!manifest.judge.ready) root.append(el("p", "mast-error", manifest.judge.reason));
   const body = () => ({ branch_id: selection.branchId, cursor: selection.cursor, completeness });
   openDialog("Analyze with MAST", root, { kicker: "", confirm: "Analyze", pending: "Starting…",
@@ -294,6 +295,7 @@ function analyzeDialog(manifest, selection, host) {
         ? `Sends the selected trace to OpenAI ${manifest.judge.model} in ${preview.chunk_count} chunks, with up to two requests per chunk for judgments and evidence, followed by reconciliation requests. All chunks and the combined report are saved.`
         : `Sends events 1–${selection.cursor} to OpenAI ${manifest.judge.model}, then one more request to locate evidence for each trait.`;
       show(sizeCheckText(preview), ready ? "ready" : "error");
+      dataWarnings.replaceChildren(...dataWarningItems(preview));
     } catch (error) {
       if (!isCurrent(ticket)) return;
       show(error.message, "error");

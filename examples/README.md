@@ -13,6 +13,8 @@ Run commands from the repository root with `.venv-crewai` activated. Use one ser
 | Observe an LLM application | Same arithmetic crew with GPT-5.5 | Yes | Omit `--offline` after configuring `OPENAI_API_KEY` |
 | Compare control and attack | Bundled ACIArena pairs, including medicine | None during import | [ACIArena examples](aciarena/README.md#complete-examples-for-the-explorer) |
 | Inspect medical simulator data | An existing messageboard batch with `manifest.json` and event logs | None during import | [Messageboard importer](messageboard/README.md) |
+| Inspect redacted, action-only records | A slice of the SwarmTraces export (`redacted.jsonl`) | None during import | [SwarmTraces importer](swarmtraces/README.md) |
+| Inspect agents coordinating on public wikis | The collusion.wiki export | None during import | [collusion.wiki importer](collusion_wiki/README.md) |
 | Analyze failure modes | Any selected saved branch/cursor | Yes, only when requested | [MAST guide](../docs/observability/mast/README.md) |
 
 Importing records and creating a branch do not execute agents. The timeline's play button replays history. **Create branch and run live** generates new output using the runtime shown in the preview.
@@ -31,6 +33,7 @@ Importing records and creating a branch do not execute agents. The timeline's pl
 - `crewai/`: the primary native integration example and the selective AI Village research recording.
 - `aciarena/`: saved benchmark imports, upstream generation, and existing research protocols. Its fixtures also exercise CrewAI continuation and MAST input integrity.
 - `messageboard/`: an importer for the medical-data simulator's saved logs; it does not generate runs.
+- `swarmtraces/` and `collusion_wiki/`: importers for two public datasets that lack some context. They declare what is missing (see [Declare what your records lack](../docs/integration.md#declare-what-your-records-lack)).
 
 The old gated AI Village leader-election loader and standalone CASPIAN demo CLIs were removed when onboarding moved to CrewAI. Numeric helpers still required to test CASPIAN moved to `tests/support/`; the optional method and its tests remain. Existing `data/` directories, artifacts, upstream repositories, and separate research experiments were not removed.
 

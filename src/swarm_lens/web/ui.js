@@ -4,6 +4,9 @@ export const formatNumber = (value) =>
   new Intl.NumberFormat("en").format(value);
 export const time = (value) =>
   value ? new Date(value).toISOString().slice(11, 19) : "—";
+// An event's clock time as the importer declared it: stand-in (ordinal) times show no clock, approximate ones a "≈".
+export const eventTime = (event) =>
+  event?.time_grade === "ordinal" ? "order only" : `${event?.time_grade === "approximate" ? "≈" : ""}${time(event?.at)}`;
 export const date = (value) =>
   value
     ? new Date(value).toLocaleDateString("en", {

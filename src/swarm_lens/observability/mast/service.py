@@ -3,6 +3,7 @@ from dataclasses import asdict
 import hashlib
 import json
 
+from swarm_lens.application.profile import profile, warnings
 from swarm_lens.core.findings import encode_output
 from swarm_lens.core.models import DomainError, new_id, utc_now
 from .errors import provider_failure
@@ -35,7 +36,9 @@ class MastService:
         description = self.plugin.judge.describe()
         if not description["ready"]:
             summary.update(can_analyze=False, reason=description["reason"])
-        return {**summary, "branch_id": branch_id, "cursor": cursor, "judge": description}
+        # MAST's failure modes assume agents talking to each other; say so when the history lacks that, but allow it.
+        data_warnings = warnings(profile(history), "conversation", "actors")
+        return {**summary, "branch_id": branch_id, "cursor": cursor, "judge": description, "data_warnings": data_warnings}
 
     def submit(self, branch_id, cursor, completeness):
         description = self.plugin.judge.describe()

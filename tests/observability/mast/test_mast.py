@@ -145,6 +145,15 @@ def test_preview_checks_frozen_input_without_sending_or_creating_job(service, br
         assert not service.plugin.judge.prompts
 
 
+def test_preview_warns_but_allows_a_history_without_agents_talking_to_each_other(service, branch):
+    with TestClient(app(service)) as client:
+        preview = client.post("/api/plugins/mast/preview",
+                              json={"branch_id": branch.id, "cursor": 7, "completeness": "unknown"}).json()
+    assert preview["can_analyze"]
+    assert preview["data_warnings"] == [
+        "Conversation: Messages exist, but no channel has messages from two or more agents."]
+
+
 def test_invalid_provider_output_is_saved_for_review_not_scored_negative(service, branch):
     service.plugin.judge.text = "No valid structured response"
     job = service.submit(branch.id, 4, "unknown")

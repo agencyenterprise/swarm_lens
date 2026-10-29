@@ -1,4 +1,4 @@
-import { el, button, svg, time, color, eventTone, stageOf, speakerName, avatar, tip, formatNumber } from "./ui.js";
+import { el, button, svg, time, eventTime, color, eventTone, stageOf, speakerName, avatar, tip, formatNumber } from "./ui.js";
 import { NO_FINDINGS, eventSpan, pluginTitle } from "./findings.js";
 import { timelineTime, gapDuration } from "./timeline-time.js";
 
@@ -143,7 +143,7 @@ export class PlaybackBar {
   update(ordered, branch, cursor) {
     this.positionText.textContent = `${cursor} / ${branch?.head ?? ordered.length}`;
     const index = lastAtOrBefore(ordered, cursor, (event) => event.position);
-    this.timeText.textContent = ordered[index] ? time(ordered[index].at) : "";
+    this.timeText.textContent = ordered[index] ? eventTime(ordered[index]) : "";
     let stage = null;
     for (let back = index; back >= 0 && !stage; back--) stage = stageOf(ordered[back]);
     this.stageText.textContent = stage || "";
@@ -559,6 +559,8 @@ export class EventTimeline {
   }
 
   timeTicks() {
+    // Stand-in times keep only the order of events, so a clock axis would be invented.
+    if (this.events.length && this.events.every((event) => event.time_grade === "ordinal")) return [];
     const minutes = TICK_MINUTES.find((value) => value * this.scale >= MIN_TICK_SPACING)
       || Math.ceil(MIN_TICK_SPACING / this.scale / 1440) * 1440;
     const gapCenters = this.clock.gaps.map((gap) => this.xAt((gap.start + gap.end) / 2));
@@ -826,7 +828,7 @@ export class EventTimeline {
     node.style.setProperty("--c", event.agent_id ? color(event.agent_id, this.agents) : "var(--text-2)");
     node.lastChild.textContent = flagText(event, tone);
     node.setAttribute("aria-label",
-      `${speakerName(event, this.agents)}, ${event.stage_label || event.label}, ${time(event.at)}, event ${event.position}`);
+      `${speakerName(event, this.agents)}, ${event.stage_label || event.label}, ${eventTime(event)}, event ${event.position}`);
   }
 
   markerState(node, event) {
@@ -1063,7 +1065,7 @@ export class EventTimeline {
     if (!hit) return;
     const { event, node } = hit;
     const head = el("div", "tl-tip-head");
-    head.append(el("strong", "", speakerName(event, this.agents)), el("span", "mono", time(event.at)));
+    head.append(el("strong", "", speakerName(event, this.agents)), el("span", "mono", eventTime(event)));
     const parts = [head];
     if (event.stage_label) parts.push(el("div", "tl-tip-stage", event.stage_label));
     if (event.preview) parts.push(el("div", "tl-tip-preview", event.preview));

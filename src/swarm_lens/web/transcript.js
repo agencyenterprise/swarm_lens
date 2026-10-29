@@ -1,4 +1,4 @@
-import { el, button, avatar, color, eventTone, stageOf, speakerName, time, formatNumber, failure, tip } from "./ui.js";
+import { el, button, avatar, color, eventTone, stageOf, speakerName, eventTime, formatNumber, failure, tip } from "./ui.js";
 import { renderMarkdownInto } from "./markdown.js";
 
 const PAGE = 150;
@@ -334,7 +334,7 @@ export class Transcript {
     const agent = agents[event.agent_id];
     const name = el("span", "tx-speaker", speakerName(event, agents));
     if (agent) name.style.color = color(event.agent_id, agents);
-    head.append(avatar(agent || { name: name.textContent }), name, el("time", "tx-time mono", time(event.at)));
+    head.append(avatar(agent || { name: name.textContent }), name, el("time", "tx-time mono", eventTime(event)));
     const body = el("div", "tx-body");
     renderMarkdownInto(body, event.preview).catch(failure);
     const more = button("Show more", (click) => {
@@ -354,7 +354,7 @@ export class Transcript {
     const head = el("div", "tx-head");
     head.append(tip(el("span", "tx-callout-label", label), "Change made when forking"));
     if (agent) head.append(el("span", "tx-callout-agent", agent.name));
-    head.append(el("time", "tx-time mono", time(event.at)));
+    head.append(el("time", "tx-time mono", eventTime(event)));
     node.append(head);
     if (event.preview) node.append(el("p", "tx-callout-text", event.preview));
     return node;
@@ -366,7 +366,7 @@ export class Transcript {
     const agent = this.props.agents[event.agent_id];
     node.append(el("span", "tx-row-kind", kind));
     if (agent) node.append(el("span", "tx-row-agent", agent.name));
-    node.append(el("span", "tx-row-text", oneLine(event.preview)), el("time", "tx-time mono", time(event.at)));
+    node.append(el("span", "tx-row-text", oneLine(event.preview)), el("time", "tx-time mono", eventTime(event)));
     return node;
   }
 
